@@ -1,0 +1,33 @@
+{
+  "name": "risk-assessment-management-system",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Production-grade risk dashboard (React, FMEA/RPN, local storage)",
+  "main": "server/index.js",
+  "workspaces": [
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,ui -c blue,magenta \"node server/index.js\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "node server/index.js",
+    "preview": "npm run preview -w client"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "react",
+    "risk-management",
+    "fmea"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
