@@ -18,28 +18,28 @@ export default function ProjectScopeBar({
   };
 
   return (
-    <div className="rounded-xl border border-slate-600/70 bg-surface-900/80 p-4 shadow-card">
-      <div className="flex flex-wrap items-end gap-3">
-        <label className="min-w-[200px] flex-1 text-xs text-slate-400">
-          Active project name
+    <section className="app-card p-4 sm:p-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-end">
+        <label className="min-w-0 flex-1 sm:min-w-[240px]">
+          <span className="app-label">Project</span>
           <input
             type="text"
             value={nameInput}
             onChange={(e) => setNameInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && applyName()}
-            placeholder="e.g. Hospital ERP rollout, Wind farm Phase 2…"
-            className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white placeholder:text-slate-600"
+            placeholder="Project name"
+            className="app-input"
           />
         </label>
         <button
           type="button"
           onClick={applyName}
-          className="rounded-lg bg-slate-700 px-4 py-2 text-sm font-medium text-white hover:bg-slate-600"
+          className="btn-primary w-full shrink-0 sm:w-auto"
         >
           Apply
         </button>
-        <label className="text-xs text-slate-400">
-          Switch project
+        <label className="w-full sm:w-auto sm:min-w-[200px]">
+          <span className="app-label">View</span>
           <select
             value={showAllProjects ? '__all__' : activeProject.key || '__all__'}
             onChange={(e) => {
@@ -50,9 +50,9 @@ export default function ProjectScopeBar({
               }
               selectProject(v);
             }}
-            className="mt-1 block w-full min-w-[180px] rounded-lg border border-slate-600 bg-surface-950 px-2 py-2 text-sm text-slate-100"
+            className="app-select"
           >
-            <option value="__all__">— All projects (overview) —</option>
+            <option value="__all__">All projects</option>
             {projectOptions.map((o) => (
               <option key={o.key} value={o.key}>
                 {o.name} ({o.code})
@@ -61,23 +61,19 @@ export default function ProjectScopeBar({
           </select>
         </label>
       </div>
-      <p className="mt-2 text-xs text-slate-500">
+      <p className="mt-3 border-t border-slate-800/80 pt-3 text-[12px] text-slate-500">
         {showAllProjects ? (
-          <>
-            <strong className="text-slate-400">Overview</strong> — showing every
-            risk across projects. Choose a project above or pick an existing one
-            from the list to focus the register, charts, and exports only on that
-            workstream.
-          </>
+          <>All projects · combined view</>
         ) : (
           <>
-            <strong className="text-slate-400">Focused</strong> — register and
-            charts show only <strong className="text-slate-300">{activeProject.name}</strong>{' '}
-            (IDs prefixed {activeProject.code}-). Quick-fill uses this project + your
-            detail text so batches do not mix with other projects.
+            <span className="text-slate-400">{activeProject.name}</span>
+            <span className="text-slate-600"> · </span>
+            <span className="font-mono text-[11px] text-slate-500">
+              {activeProject.code}-
+            </span>
           </>
         )}
       </p>
-    </div>
+    </section>
   );
 }

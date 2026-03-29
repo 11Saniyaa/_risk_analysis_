@@ -77,14 +77,14 @@ function InherentRiskBarChart({ risks }) {
 
   if (!risks.length) {
     return (
-      <div className="flex h-56 items-center justify-center rounded-xl border border-slate-700/80 bg-surface-850 text-sm text-slate-500">
-        Add risks to chart matrix scores
+      <div className="flex h-56 items-center justify-center rounded-xl border border-slate-700/60 bg-surface-900/50 text-[13px] text-slate-500">
+        Add risks to see P×I scores
       </div>
     );
   }
 
   return (
-    <div className="h-64 rounded-xl border border-blue-900/40 bg-slate-900/40 p-3">
+    <div className="h-64 rounded-xl border border-sky-900/35 bg-surface-900/40 p-4 shadow-inner">
       <Bar data={data} options={options} />
     </div>
   );
@@ -136,14 +136,14 @@ function FmeaRpnBarChart({ risks }) {
 
   if (!risks.length) {
     return (
-      <div className="flex h-56 items-center justify-center rounded-xl border border-slate-700/80 bg-surface-850 text-sm text-slate-500">
-        Add risks to chart RPN
+      <div className="flex h-56 items-center justify-center rounded-xl border border-slate-700/60 bg-surface-900/50 text-[13px] text-slate-500">
+        Add risks to see RPN values
       </div>
     );
   }
 
   return (
-    <div className="h-64 rounded-xl border border-emerald-900/40 bg-slate-900/40 p-3">
+    <div className="h-64 rounded-xl border border-emerald-900/35 bg-surface-900/40 p-4 shadow-inner">
       <Bar data={data} options={options} />
     </div>
   );
@@ -151,42 +151,21 @@ function FmeaRpnBarChart({ risks }) {
 
 export function MetricsExplainer() {
   return (
-    <div className="rounded-xl border border-slate-600/60 bg-slate-900/40 p-4 text-sm leading-relaxed text-slate-300">
-      <h3 className="text-base font-semibold text-white">
-        Why two numbers?
-      </h3>
-      <div className="mt-3 grid gap-4 md:grid-cols-2">
-        <div className="rounded-lg border border-blue-500/25 bg-blue-950/30 p-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-blue-300">
-            Matrix score (P × I)
-          </p>
-          <p className="mt-1 text-xs text-slate-400">
-            Answers: &ldquo;How likely is this, and how bad if it happens?&rdquo; You
-            rate <strong>Probability</strong> and <strong>Impact</strong> each from
-            1–5. Multiply them → <strong>1 to 25</strong>. This matches the coloured
-            5×5 heat map and the priority band (Low / Medium / High).
-          </p>
-        </div>
-        <div className="rounded-lg border border-emerald-500/25 bg-emerald-950/25 p-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-emerald-300">
-            RPN (S × O × D)
-          </p>
-          <p className="mt-1 text-xs text-slate-400">
-            Classic <strong>FMEA</strong>: how severe is the failure, how often could
-            it occur, how well do we detect it before harm? Each is 1–10. Multiply
-            all three → <strong>RPN up to 1000</strong>. Use it to rank which failure
-            modes to fix first — it is <strong>not</strong> the same scale as the
-            matrix score above.
-          </p>
-        </div>
-      </div>
+    <div className="flex flex-wrap items-center gap-x-6 gap-y-1 border-b border-slate-800/80 pb-4 text-[12px] text-slate-500">
+      <span>
+        <span className="font-medium text-sky-400/90">P×I</span> matrix · 1–25
+      </span>
+      <span className="hidden sm:inline text-slate-700">|</span>
+      <span>
+        <span className="font-medium text-emerald-400/90">RPN</span> FMEA · ≤1000
+      </span>
     </div>
   );
 }
 
 export default function MetricsCharts({ risks, compact = false }) {
   const charts = (
-    <div className="grid gap-6 lg:grid-cols-2">
+    <div className="grid gap-4 lg:grid-cols-2">
       <InherentRiskBarChart risks={risks} />
       <FmeaRpnBarChart risks={risks} />
     </div>
@@ -203,3 +182,4 @@ export default function MetricsCharts({ risks, compact = false }) {
     </div>
   );
 }
+

@@ -33,9 +33,7 @@ export default function App() {
 
   const openNew = () => {
     if (showAllProjects) {
-      alert(
-        'Choose “All projects” only for overview. Apply a project name in the scope bar, then add risks so they stay in one workstream.'
-      );
+      alert('Select a project in Scope before adding a risk.');
       return;
     }
     setEditRisk(null);
@@ -73,51 +71,46 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-surface-950">
-      <header className="no-print sticky top-0 z-40 border-b border-slate-800/80 bg-surface-950/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-3 px-4 py-3">
-          <div>
-            <p className="text-[10px] uppercase tracking-[0.25em] text-slate-500">
-              Portfolio · Enterprise UI
-            </p>
-            <h1 className="text-xl font-semibold tracking-tight text-white md:text-2xl">
-              Risk Command
+      <header className="no-print sticky top-0 z-40 border-b border-slate-800/80 bg-surface-950/90 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-[1600px] flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 items-baseline gap-3">
+            <h1 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">
+              Risk register
             </h1>
-            <p className="text-xs text-slate-500">
-              Per-project register · FMEA RPN · P×I matrix
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="hidden text-xs text-slate-500 sm:inline">
-              {total} shown · {high} high
+            <span className="hidden text-[13px] tabular-nums text-slate-500 sm:inline">
+              {total} risks · {high} high
             </span>
-            <button
-              type="button"
-              onClick={openNew}
-              className="rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500"
-            >
-              + Risk
-            </button>
-            <button
-              type="button"
-              onClick={() => downloadCsv(visible)}
-              className="rounded-lg border border-slate-600 px-3 py-2 text-sm text-slate-200 hover:bg-slate-800"
-            >
-              CSV
-            </button>
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="rounded-lg border border-slate-600 px-3 py-2 text-sm text-slate-200 hover:bg-slate-800"
-            >
-              Print / PDF
-            </button>
-            <button
-              type="button"
-              onClick={() => setPresent(true)}
-              className="rounded-lg border border-amber-600/50 bg-amber-950/40 px-3 py-2 text-sm text-amber-100 hover:bg-amber-900/50"
-            >
-              Present
-            </button>
+          </div>
+          <div className="flex flex-shrink-0 flex-col items-stretch gap-2.5 sm:items-end">
+            <span className="text-[13px] tabular-nums text-slate-500 sm:hidden">
+              {total} · {high} high
+            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              <button type="button" onClick={openNew} className="btn-primary">
+                Add risk
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadCsv(visible)}
+                className="btn-secondary"
+              >
+                Export CSV
+              </button>
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="btn-secondary"
+              >
+                Print / PDF
+              </button>
+              <button
+                type="button"
+                onClick={() => setPresent(true)}
+                className="btn-accent"
+              >
+                Present
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -138,14 +131,14 @@ export default function App() {
           />
         </div>
 
-        <div className="no-print space-y-6 print:break-inside-avoid">
+        <div className="no-print space-y-5 print:break-inside-avoid">
           <MetricsCharts risks={visible} />
           <RiskMatrix risks={visible} />
         </div>
 
         <section className="print-root">
-          <h2 className="mb-2 text-lg font-semibold text-slate-200 print:text-black">
-            Risk register
+          <h2 className="mb-3 text-[15px] font-semibold tracking-tight text-slate-200">
+            Register
           </h2>
           <RiskTable
             risks={visible}
@@ -168,9 +161,10 @@ export default function App() {
         <PresentationMode risks={visible} onClose={() => setPresent(false)} />
       )}
 
-      <footer className="no-print border-t border-slate-800 py-6 text-center text-xs text-slate-600">
-        Data in your browser (localStorage). Quick-fill is scoped to the active
-        project — different project names get different risk sets.
+      <footer className="no-print border-t border-slate-800/60 py-5">
+        <p className="mx-auto max-w-[1600px] px-4 text-center text-[11px] text-slate-600">
+          Data saved in this browser only.
+        </p>
       </footer>
     </div>
   );

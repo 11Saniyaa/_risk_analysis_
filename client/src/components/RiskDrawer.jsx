@@ -102,73 +102,74 @@ export default function RiskDrawer({
         aria-label="Close"
         onClick={onClose}
       />
-      <div className="relative flex h-full w-full max-w-lg flex-col border-l border-slate-700 bg-surface-900 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-700 px-4 py-3">
+      <div className="relative flex h-full w-full max-w-lg flex-col border-l border-slate-700/90 bg-surface-900 shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-700/90 px-5 py-4">
           <h2 className="text-lg font-semibold text-white">
-            {initial ? 'Edit risk' : 'New risk'}
+            {initial ? 'Edit' : 'New risk'}
           </h2>
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-white"
+            className="btn-ghost rounded-lg p-2 text-lg leading-none"
+            aria-label="Close"
           >
             ✕
           </button>
         </div>
-        <form onSubmit={submit} className="flex flex-1 flex-col overflow-y-auto p-4">
-          <div className="mb-4 rounded-lg border border-blue-500/30 bg-blue-950/40 p-3 text-sm">
-            <div className="font-medium text-blue-200">Live preview</div>
-            <p className="mt-1 text-[11px] leading-snug text-slate-500">
-              <span className="text-blue-300/90">P×I</span> drives the matrix and
-              priority band. <span className="text-emerald-300/90">RPN</span> is
-              independent (FMEA scale).
-            </p>
-            <div className="mt-2 grid grid-cols-3 gap-2 text-slate-300">
-              <div>
-                <span className="text-slate-500">P×I score</span>{' '}
-                <span className="font-mono text-white">
-                  {liveScore ?? '—'}
-                </span>
-              </div>
-              <div>
-                <span className="text-slate-500">RPN</span>{' '}
-                <span className="font-mono text-emerald-300">
-                  {liveRpn ?? '—'}
-                </span>
-              </div>
-              <div>
-                <span className="text-slate-500">Priority</span>{' '}
-                <span className="font-semibold text-amber-200">{livePri}</span>
-              </div>
+        <form onSubmit={submit} className="flex flex-1 flex-col overflow-y-auto px-5 pb-6 pt-4">
+          <div className="mb-4 grid grid-cols-3 gap-2 rounded-lg border border-slate-700/80 bg-surface-950/80 px-3 py-3 text-[12px]">
+            <div>
+              <span className="block text-[10px] uppercase tracking-wider text-slate-500">
+                P×I
+              </span>
+              <span className="font-mono text-[15px] text-white">
+                {liveScore ?? '—'}
+              </span>
+            </div>
+            <div>
+              <span className="block text-[10px] uppercase tracking-wider text-slate-500">
+                RPN
+              </span>
+              <span className="font-mono text-[15px] text-emerald-300/90">
+                {liveRpn ?? '—'}
+              </span>
+            </div>
+            <div>
+              <span className="block text-[10px] uppercase tracking-wider text-slate-500">
+                Priority
+              </span>
+              <span className="text-[15px] font-semibold text-amber-200/90">
+                {livePri}
+              </span>
             </div>
           </div>
 
-          <label className="mb-2 block text-xs text-slate-400">
-            Risk ID
+          <label className="mb-4 block">
+            <span className="app-label">Risk ID</span>
             <input
               required
               value={f.riskId}
               onChange={set('riskId')}
-              className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+              className="app-input font-mono"
             />
           </label>
-          <label className="mb-2 block text-xs text-slate-400">
-            Description
+          <label className="mb-4 block">
+            <span className="app-label">Description</span>
             <textarea
               required
               rows={2}
               value={f.description}
               onChange={set('description')}
-              className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+              className="app-input min-h-[72px]"
             />
           </label>
-          <div className="mb-2 grid grid-cols-2 gap-2">
-            <label className="text-xs text-slate-400">
-              Category
+          <div className="mb-4 grid grid-cols-2 gap-3">
+            <label className="block">
+              <span className="app-label">Category</span>
               <select
                 value={f.category}
                 onChange={set('category')}
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-2 py-2 text-sm text-white"
+                className="app-select"
               >
                 {CATEGORIES.map((c) => (
                   <option key={c} value={c}>
@@ -177,118 +178,118 @@ export default function RiskDrawer({
                 ))}
               </select>
             </label>
-            <label className="text-xs text-slate-400">
-              Owner
+            <label className="block">
+              <span className="app-label">Owner</span>
               <input
                 value={f.owner}
                 onChange={set('owner')}
-                placeholder="Team / person"
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+                placeholder="Team or person"
+                className="app-input"
               />
             </label>
           </div>
-          <label className="mb-2 block text-xs text-slate-400">
-            Cause
+          <label className="mb-4 block">
+            <span className="app-label">Cause</span>
             <textarea
               rows={2}
               value={f.cause}
               onChange={set('cause')}
-              className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+              className="app-input min-h-[72px]"
             />
           </label>
-          <label className="mb-2 block text-xs text-slate-400">
-            Impact description
+          <label className="mb-4 block">
+            <span className="app-label">Impact description</span>
             <textarea
               rows={2}
               value={f.impactDescription}
               onChange={set('impactDescription')}
-              className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+              className="app-input min-h-[72px]"
             />
           </label>
 
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-            Matrix (1–5)
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+            Matrix ratings (1–5)
           </p>
-          <div className="mb-3 grid grid-cols-2 gap-2">
-            <label className="text-xs text-slate-400">
-              Probability
+          <div className="mb-4 grid grid-cols-2 gap-3">
+            <label className="block">
+              <span className="app-label">Probability</span>
               <input
                 type="number"
                 min={1}
                 max={5}
                 value={f.probability}
                 onChange={set('probability')}
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+                className="app-input tabular-nums"
               />
             </label>
-            <label className="text-xs text-slate-400">
-              Impact
+            <label className="block">
+              <span className="app-label">Impact</span>
               <input
                 type="number"
                 min={1}
                 max={5}
                 value={f.impact}
                 onChange={set('impact')}
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+                className="app-input tabular-nums"
               />
             </label>
           </div>
 
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
-            FMEA (1–10) — RPN = S×O×D
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">
+            FMEA (1–10) · RPN = S×O×D
           </p>
-          <div className="mb-3 grid grid-cols-3 gap-2">
-            <label className="text-xs text-slate-400">
-              Severity
+          <div className="mb-4 grid grid-cols-3 gap-2">
+            <label className="block">
+              <span className="app-label">Severity</span>
               <input
                 type="number"
                 min={1}
                 max={10}
                 value={f.severity}
                 onChange={set('severity')}
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+                className="app-input tabular-nums"
               />
             </label>
-            <label className="text-xs text-slate-400">
-              Occurrence
+            <label className="block">
+              <span className="app-label">Occurrence</span>
               <input
                 type="number"
                 min={1}
                 max={10}
                 value={f.occurrence}
                 onChange={set('occurrence')}
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+                className="app-input tabular-nums"
               />
             </label>
-            <label className="text-xs text-slate-400">
-              Detection
+            <label className="block">
+              <span className="app-label">Detection</span>
               <input
                 type="number"
                 min={1}
                 max={10}
                 value={f.detection}
                 onChange={set('detection')}
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+                className="app-input tabular-nums"
               />
             </label>
           </div>
 
-          <label className="mb-2 block text-xs text-slate-400">
-            Mitigation
+          <label className="mb-4 block">
+            <span className="app-label">Mitigation</span>
             <textarea
               rows={3}
               value={f.mitigation}
               onChange={set('mitigation')}
-              className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-white"
+              className="app-input min-h-[88px]"
             />
           </label>
-          <div className="mb-4 grid grid-cols-2 gap-2">
-            <label className="text-xs text-slate-400">
-              Treatment
+          <div className="mb-6 grid grid-cols-2 gap-3">
+            <label className="block">
+              <span className="app-label">Treatment</span>
               <select
                 value={f.treatment}
                 onChange={set('treatment')}
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-2 py-2 text-sm text-white"
+                className="app-select"
               >
                 <option>Unassigned</option>
                 <option>Avoid</option>
@@ -297,31 +298,24 @@ export default function RiskDrawer({
                 <option>Accept</option>
               </select>
             </label>
-            <label className="text-xs text-slate-400">
-              Status
+            <label className="block">
+              <span className="app-label">Status</span>
               <select
                 value={f.status}
                 onChange={set('status')}
-                className="mt-1 w-full rounded-lg border border-slate-600 bg-surface-950 px-2 py-2 text-sm text-white"
+                className="app-select"
               >
                 <option>Open</option>
                 <option>Closed</option>
               </select>
             </label>
           </div>
-          <div className="mt-auto flex gap-2 border-t border-slate-700 pt-4">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 rounded-lg border border-slate-600 py-2 text-sm text-slate-300 hover:bg-slate-800"
-            >
+          <div className="mt-auto flex gap-3 border-t border-slate-700/90 pt-5">
+            <button type="button" onClick={onClose} className="btn-secondary flex-1">
               Cancel
             </button>
-            <button
-              type="submit"
-              className="flex-1 rounded-lg bg-blue-600 py-2 text-sm font-medium text-white hover:bg-blue-500"
-            >
-              Save
+            <button type="submit" className="btn-primary flex-1">
+              Save risk
             </button>
           </div>
         </form>

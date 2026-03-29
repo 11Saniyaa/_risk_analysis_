@@ -4,7 +4,62 @@
 
 @layer base {
   html {
-    @apply bg-surface-950 text-slate-100;
+    @apply bg-surface-950 text-slate-100 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  ::selection {
+    @apply bg-sky-500/35 text-white;
+  }
+}
+
+@layer components {
+  .app-card {
+    @apply rounded-xl border border-slate-800/90 bg-surface-900/40;
+  }
+
+  .app-section-title {
+    @apply text-[13px] font-semibold tracking-tight text-slate-100;
+  }
+
+  .app-section-hint {
+    @apply mt-1 text-[13px] leading-relaxed text-slate-500;
+  }
+
+  .app-label {
+    @apply mb-0 block text-[11px] font-medium text-slate-500;
+  }
+
+  .app-input {
+    @apply mt-1.5 w-full rounded-lg border border-slate-600/80 bg-surface-950 px-3 py-2.5 text-sm text-slate-100 shadow-inner placeholder:text-slate-600 transition-colors;
+    @apply focus:border-sky-500/80 focus:outline-none focus:ring-2 focus:ring-sky-500/25;
+  }
+
+  .app-select {
+    @apply mt-1.5 w-full cursor-pointer rounded-lg border border-slate-600/80 bg-surface-950 px-3 py-2 text-sm text-slate-100 shadow-inner transition-colors;
+    @apply focus:border-sky-500/80 focus:outline-none focus:ring-2 focus:ring-sky-500/25;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg bg-sky-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors;
+    @apply hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-600/90 bg-surface-800/80 px-3.5 py-2.5 text-sm font-medium text-slate-200 transition-colors;
+    @apply hover:border-slate-500 hover:bg-surface-700/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-500;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:bg-slate-800/80 hover:text-slate-100;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center rounded-lg border border-amber-500/35 bg-amber-950/50 px-3.5 py-2.5 text-sm font-medium text-amber-100 transition-colors hover:bg-amber-900/45;
+  }
+
+  .table-num {
+    @apply text-right tabular-nums text-slate-200;
   }
 }
 

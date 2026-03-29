@@ -12,9 +12,7 @@ export default function GeneratedRisksPanel({
   const run = () => {
     setMsg(null);
     if (showAllProjects || !String(activeProject.name || '').trim()) {
-      setMsg(
-        'Set and apply an active project name first (not “All projects”). Then generate — risks stay under that project only.'
-      );
+      setMsg('Apply a project name first.');
       return;
     }
     const list = generateRisksFromContext(ctx, {
@@ -23,41 +21,32 @@ export default function GeneratedRisksPanel({
       projectCode: activeProject.code,
     });
     onAddMany(list);
-    setMsg(
-      `Added up to 5 drafts for «${activeProject.name}». Duplicate descriptions in this project were skipped.`
-    );
+    setMsg(`Added drafts · ${activeProject.name} (duplicates skipped)`);
   };
 
   return (
-    <div className="rounded-xl border border-slate-600/80 bg-surface-850 p-4 shadow-card">
-      <h3 className="text-sm font-semibold text-white">
-        Quick-fill for this project only
-      </h3>
-      <p className="mt-1 text-xs leading-relaxed text-slate-400">
-        Describe what is unique about <strong className="text-slate-300">this</strong>{' '}
-        project (go-live, site, constraints). The generator hashes{' '}
-        <strong>project + your text</strong>, so another project with different text
-        gets a different set — nothing is shared with other workstreams.
-      </p>
-      <textarea
-        value={ctx}
-        onChange={(e) => setCtx(e.target.value)}
-        rows={3}
-        placeholder="Detail for this project only: e.g. cutover weekend, single data centre, regulator deadline…"
-        className="mt-2 w-full rounded-lg border border-slate-600 bg-surface-950 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600"
-      />
-      <button
-        type="button"
-        onClick={run}
-        className="mt-2 rounded-lg bg-slate-700 px-4 py-2 text-sm font-medium text-white hover:bg-slate-600"
-      >
-        Generate 5 risks (this project)
-      </button>
+    <section className="app-card p-4 sm:p-5">
+      <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+        <h2 className="text-[15px] font-semibold text-slate-100">Quick-fill</h2>
+        <button type="button" onClick={run} className="btn-secondary text-[13px]">
+          Generate 5
+        </button>
+      </div>
+      <label className="block">
+        <span className="app-label">Context (optional)</span>
+        <textarea
+          value={ctx}
+          onChange={(e) => setCtx(e.target.value)}
+          rows={2}
+          placeholder="Scope, constraints, domain keywords…"
+          className="app-input min-h-[72px] resize-y"
+        />
+      </label>
       {msg && (
-        <p className="mt-2 text-xs text-slate-400" role="status">
+        <p className="mt-2 text-[12px] text-slate-500" role="status">
           {msg}
         </p>
       )}
-    </div>
+    </section>
   );
 }

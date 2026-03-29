@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         sans: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
         display: ['IBM Plex Sans', 'system-ui', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
         surface: {
@@ -21,7 +22,8 @@ export default {
         },
       },
       boxShadow: {
-        card: '0 4px 24px rgba(0,0,0,0.35)',
+        card: '0 1px 0 rgba(255,255,255,0.04) inset, 0 8px 32px rgba(0,0,0,0.45)',
+        header: '0 1px 0 rgba(255,255,255,0.06)',
       },
     },
   },

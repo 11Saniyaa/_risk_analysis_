@@ -7,21 +7,17 @@ export default function PresentationMode({ risks, onClose }) {
   const open = risks.filter((r) => r.status === 'Open').length;
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col bg-[#070b12] text-white print:relative print:min-h-screen print:bg-white print:text-black">
-      <header className="no-print flex items-center justify-between border-b border-slate-800 px-6 py-4">
+    <div className="fixed inset-0 z-[100] flex flex-col bg-surface-950 text-white print:relative print:min-h-screen print:bg-white print:text-black">
+      <header className="no-print flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/90 bg-surface-950/95 px-6 py-4 shadow-header backdrop-blur-md">
         <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
+          <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-slate-500">
             Stakeholder view
           </p>
-          <h1 className="text-2xl font-semibold tracking-tight">
+          <h1 className="text-2xl font-semibold tracking-tight text-white">
             Risk &amp; FMEA overview
           </h1>
         </div>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-lg border border-slate-600 px-4 py-2 text-sm hover:bg-slate-800"
-        >
+        <button type="button" onClick={onClose} className="btn-secondary">
           Exit presentation
         </button>
       </header>
